@@ -24,10 +24,9 @@ class App extends Component {
             <Icon name="theme" circular basic color="teal" />
             <Header.Content>Potty Time</Header.Content>
           </Header>
-
+          <Divider hidden />
           <Form>
             <Dropdown
-              size="big"
               placeholder="Potty Time"
               selection
               options={pottyOptions}
@@ -60,6 +59,7 @@ class App extends Component {
 
             <Button type="submit">+</Button>
           </Form>
+          <Divider hidden />
           <Divider horizontal>Today</Divider>
           <List relaxed size="big">
             <List.Item>
