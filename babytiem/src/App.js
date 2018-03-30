@@ -13,6 +13,7 @@ import {
 } from 'semantic-ui-react';
 
 import logo from './logo.svg';
+import { mockPotties } from './mockData/mockPotties';
 import { pottyOptions } from './pottyOptions';
 
 class App extends Component {
@@ -31,31 +32,6 @@ class App extends Component {
               selection
               options={pottyOptions}
             />
-            {/* <Button.Group vertical size="huge">
-              <Button fluid color="yellow" content="Wet Diaper" />
-              <Button fluid color="brown" content="BM Diaper" />
-              <Button fluid color="teal" content="Dry Diaper" />
-              <hr />
-              <Button fluid color="olive" content="Peed in Potty" />
-              <Button fluid color="orange" content="Pooped in Potty" />
-              <Button fluid color="blue" content="Potty Attempt" />
-            </Button.Group>
-            <hr /> */}
-            {/* <Button.Group size="large">
-              <Button>Wet Diaper</Button>
-              <Button.Or />
-              <Button>BM Diaper</Button>
-              <Button.Or />
-              <Button>Dry Diaper</Button>
-            </Button.Group>
-
-            <Button.Group size="large">
-              <Button>Peed in Potty</Button>
-              <Button.Or />
-              <Button>Pooped in Potty</Button>
-              <Button.Or />
-              <Button>Potty Attempt</Button>
-            </Button.Group> */}
 
             <Button type="submit">+</Button>
           </Form>
