@@ -20,6 +20,8 @@ import { pottyOptions } from './pottyOptions';
 
 class Potty extends Component {
   render() {
+    //console.log(this.props.potty);
+    console.log(this.props);
     const { potty } = this.props;
     const { id, activity, icon, date, type, notes, child } = potty;
 
@@ -58,6 +60,23 @@ class PottyList extends Component {
   }
 }
 
+class PottyType extends Comment {
+  render() {
+    const { pottyType } = this.props;
+    const { id, text, icon } = pottyType;
+    return <Dropdown placeholder="Potty Time" selection />;
+  }
+}
+
+class PottyTypeList extends Component {
+  render() {
+    const { pottyTypeList } = this.props;
+    console.log(this.props);
+
+    return null;
+  }
+}
+
 class App extends Component {
   renderHeader = () => {
     return (
@@ -67,24 +86,14 @@ class App extends Component {
       </Header>
     );
   };
-
-  renderControlPanel = () => {
-    return (
-      <Form>
-        <Dropdown placeholder="Potty Time" selection options={pottyOptions} />
-
-        <Button type="submit">+</Button>
-      </Form>
-    );
-  };
-
   render() {
     return (
       <div className="App">
         <Container>
           {this.renderHeader()}
           <Divider hidden />
-          {this.renderControlPanel()}
+          {/* {this.renderControlPanel()} */}
+          <PottyTypeList pottyTypeList={pottyOptions} />
           <Divider hidden />
           <PottyList pottyList={mockPotties} />
         </Container>
