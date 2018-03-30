@@ -1,5 +1,7 @@
 import 'semantic-ui-css/semantic.min.css';
 
+import _ from 'lodash';
+import moment from 'moment';
 import React, { Component } from 'react';
 import {
   Button,
@@ -15,6 +17,46 @@ import {
 import logo from './logo.svg';
 import { mockPotties } from './mockData/mockPotties';
 import { pottyOptions } from './pottyOptions';
+
+class Potty extends Component {
+  render() {
+    const { potty } = this.props;
+    const { id, activity, icon, date, type, notes, child } = potty;
+
+    return (
+      <List.Item>
+        <List.Icon color="teal" circular inverted name={icon} size="big" />
+        <List.Content verticalAlign="middle">
+          <List.Header>
+            {child.firstName} - {type}
+          </List.Header>
+          <List.Description>{date}</List.Description>
+          <List.Description>{notes}</List.Description>
+        </List.Content>
+      </List.Item>
+    );
+  }
+}
+
+class PottyList extends Component {
+  render() {
+    const { pottyList } = this.props;
+
+    function pottyToHTML(potty, i) {
+      return <Potty potty={potty} key={potty.id} />;
+    }
+
+    const pottyListHTML = _.chain(pottyList)
+      .map(pottyToHTML)
+      .value();
+
+    return (
+      <List relaxed size="big">
+        {pottyListHTML}
+      </List>
+    );
+  }
+}
 
 class App extends Component {
   renderHeader = () => {
@@ -36,52 +78,6 @@ class App extends Component {
     );
   };
 
-  renderPottyList = () => {
-    return (
-      <List relaxed size="big">
-        <Divider horizontal>Today</Divider>
-        <List.Item>
-          <List.Icon color="teal" circular inverted name="theme" size="big" />
-          <List.Content verticalAlign="middle">
-            <List.Header>Wet Diaper</List.Header>
-            <List.Description>11:36am</List.Description>
-            <List.Description>Pull Ups leaked</List.Description>
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon color="teal" circular inverted name="theme" size="big" />
-          <List.Content verticalAlign="middle">
-            <List.Header>BM Diaper</List.Header>
-            <List.Description>2:36pm</List.Description>
-          </List.Content>
-        </List.Item>
-        <Divider horizontal>March 23</Divider>
-        <List.Item>
-          <List.Icon color="teal" circular inverted name="theme" size="big" />
-          <List.Content verticalAlign="middle">
-            <List.Header>Wet Diaper</List.Header>
-            <List.Description>4:40pm</List.Description>
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon color="teal" circular inverted name="theme" size="big" />
-          <List.Content verticalAlign="middle">
-            <List.Header>Potty - Tried</List.Header>
-            <List.Description>4:44pm</List.Description>
-          </List.Content>
-        </List.Item>
-        <Divider horizontal>March 22</Divider>
-        <List.Item>
-          <List.Icon color="teal" circular inverted name="theme" size="big" />
-          <List.Content verticalAlign="middle">
-            <List.Header>Dry Diaper</List.Header>
-            <List.Description>1:40pm</List.Description>
-          </List.Content>
-        </List.Item>
-      </List>
-    );
-  };
-
   render() {
     return (
       <div className="App">
@@ -90,7 +86,7 @@ class App extends Component {
           <Divider hidden />
           {this.renderControlPanel()}
           <Divider hidden />
-          {this.renderPottyList()}
+          <PottyList pottyList={mockPotties} />
         </Container>
       </div>
     );
