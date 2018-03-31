@@ -49,6 +49,9 @@ class PottyList extends Component {
     }
 
     const pottyListHTML = _.chain(pottyList)
+      .filter((potty, i) => {
+        return potty.icon === 'fire';
+      })
       .map(pottyToHTML)
       .value();
 
@@ -57,23 +60,6 @@ class PottyList extends Component {
         {pottyListHTML}
       </List>
     );
-  }
-}
-
-class PottyType extends Comment {
-  render() {
-    const { pottyType } = this.props;
-    const { id, text, icon } = pottyType;
-    return <Dropdown placeholder="Potty Time" selection />;
-  }
-}
-
-class PottyTypeList extends Component {
-  render() {
-    const { pottyTypeList } = this.props;
-    console.log(this.props);
-
-    return null;
   }
 }
 
@@ -86,14 +72,24 @@ class App extends Component {
       </Header>
     );
   };
+
+  renderControlPanel = () => {
+    return (
+      <Form>
+        <Dropdown placeholder="Potty Time" selection options={pottyOptions} />
+
+        <Button type="submit">+</Button>
+      </Form>
+    );
+  };
+
   render() {
     return (
       <div className="App">
         <Container>
           {this.renderHeader()}
           <Divider hidden />
-          {/* {this.renderControlPanel()} */}
-          <PottyTypeList pottyTypeList={pottyOptions} />
+          {this.renderControlPanel()}
           <Divider hidden />
           <PottyList pottyList={mockPotties} />
         </Container>

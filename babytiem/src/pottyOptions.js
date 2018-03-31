@@ -1,31 +1,31 @@
 export const pottyOptions = [
   {
-    id: '01',
+    id: '1',
     text: 'Pee Diaper',
     icon: 'theme'
   },
   {
-    id: '02',
+    id: '2',
     text: 'Poopy Diaper',
     icon: 'fire'
   },
   {
-    id: '03',
+    id: '3',
     text: 'Peed in Potty',
     icon: 'theme'
   },
   {
-    id: '04',
+    id: '4',
     text: 'Pooped in Potty',
     icon: 'fire'
   },
   {
-    id: '05',
+    id: '5',
     text: 'Tried to Potty',
     icon: 'wait'
   },
   {
-    id: '06',
+    id: '6',
     text: 'Potty Accident',
     icon: 'bell'
   }
