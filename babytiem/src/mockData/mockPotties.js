@@ -1,195 +1,155 @@
 import moment from 'moment';
 
+const AdaHarlin = {
+  id: 'a',
+  firstName: 'Ada',
+  lastName: 'Harlin',
+  photo: 'https://randomuser.me/api/portraits/lego/1.jpg'
+};
+
+const DorianHarlin = {
+  id: 'b',
+  firstName: 'Dorian',
+  lastName: 'Harlin',
+  ageInMonths: 12,
+  photo: 'https://randomuser.me/api/portraits/lego/2.jpg'
+};
+
+const accidentType = {
+  icon: 'fire',
+  value: 'potty_accident',
+  label: 'Potty Accident'
+};
+
+const attemptType = {
+  icon: 'theme',
+  value: 'potty_attempt',
+  label: 'Potty Attempt'
+};
+
+const lastWeek = daaysago => {
+  return moment()
+    .subtract(daaysago, 'days')
+    .format('dddd, MMM Do, h:mm a')
+    .toString();
+};
+
 export const mockPotties = [
   {
     id: 1,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .format('ddd, MMM do, h:mm A')
-      .toString(),
-    type: 'wet diaper',
+    date: lastWeek(1),
+    type: attemptType,
     notes: '',
-    child: {
-      id: 'b',
-      firstName: 'Dorian',
-      lastName: 'Harlin'
-    }
+    child: DorianHarlin
   },
   {
     id: 2,
     activity: 'potty',
     icon: 'fire',
-    date: moment()
-      .subtract(3, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'BM diaper',
+    date: lastWeek(2),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 3,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(4, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'dry diaper',
+    date: lastWeek(3),
+    type: accidentType,
     notes: 'Pull Ups leaked',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 4,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(4, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'potty attempt',
+    date: lastWeek(27),
+    type: attemptType,
     notes: 'Pull Ups leaked',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 5,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(5, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'wet diaper',
+    date: lastWeek(17),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'b',
-      firstName: 'Dorian',
-      lastName: 'Harlin'
-    }
+    child: DorianHarlin
   },
   {
     id: 6,
     activity: 'potty',
     icon: 'fire',
-    date: moment()
-      .subtract(5, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'BM diaper',
+    date: lastWeek(7),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 7,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(6, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'dry diaper',
+    date: lastWeek(7),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 8,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(6, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'potty attempt',
+    date: lastWeek(67),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 9,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(6, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'wet diaper',
+    date: lastWeek(7),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 10,
     activity: 'potty',
     icon: 'fire',
-    date: moment()
-      .subtract(7, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'BM diaper',
+    date: lastWeek(7),
+    type: attemptType,
     notes: '',
-    child: {
-      id: 'b',
-      firstName: 'Dorian',
-      lastName: 'Harlin'
-    }
+    child: DorianHarlin
   },
   {
     id: 11,
     activity: 'potty',
-    icon: 'theme',
-    date: moment()
-      .subtract(7, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'dry diaper',
+    icon: 'fire',
+    date: lastWeek(7),
+    type: attemptType,
     notes: '',
-    child: {
-      id: 'a',
-      firstName: 'Ada',
-      lastName: 'Harlin'
-    }
+    child: AdaHarlin
   },
   {
     id: 12,
     activity: 'potty',
     icon: 'theme',
-    date: moment()
-      .subtract(8, 'days')
-      .format('dddd, MMM Do, h:mm a')
-      .toString(),
-    type: 'potty attempt',
+    date: lastWeek(7),
+    type: accidentType,
     notes: '',
-    child: {
-      id: 'b',
-      firstName: 'Dorian',
-      lastName: 'Harlin'
-    }
+    child: DorianHarlin
+  },
+  {
+    id: 13,
+    activity: 'potty',
+    icon: 'fire',
+    date: lastWeek(9),
+    type: accidentType,
+    notes: '',
+    child: AdaHarlin
   }
 ];
