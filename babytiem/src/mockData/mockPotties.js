@@ -142,14 +142,5 @@ export const mockPotties = [
     type: accidentType,
     notes: '',
     child: DorianHarlin
-  },
-  {
-    id: 13,
-    activity: 'potty',
-    icon: 'fire',
-    date: lastWeek(9),
-    type: accidentType,
-    notes: '',
-    child: AdaHarlin
   }
 ];

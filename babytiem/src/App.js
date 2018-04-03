@@ -34,8 +34,8 @@ const uniqueChildren = _.chain(mockPotties)
   })
   .uniqBy('id')
   .value();
+//console.log('uniqueChildren', uniqueChildren);
 
-console.log();
 class Potty extends Component {
   render() {
     const { potty } = this.props;
@@ -69,12 +69,11 @@ class PottyList extends Component {
         if (!diaperTypeFilterValue) {
           return true;
         }
-
         return potty.type.value === diaperTypeFilterValue;
       })
       .map(pottyToHTML)
       .value();
-
+    //console.log('pottyListHTML', pottyListHTML);
     return (
       <List relaxed size="big">
         {pottyListHTML}
@@ -83,8 +82,16 @@ class PottyList extends Component {
   }
 }
 
+const childNameFilter = _.chain(uniqueChildren)
+  .filter((child, i) => {
+    console.log('childNameFilter', child.firstName);
+    return child.firstName;
+  })
+  .map()
+  .value();
+
 class App extends Component {
-  state = { diaperTypeFilterValue: '' };
+  state = { diaperTypeFilterValue: '', childNameFilter: '' };
 
   renderHeader = () => {
     return (
@@ -96,38 +103,25 @@ class App extends Component {
   };
 
   renderChildFilter = () => {
-    return (
-      <div>
-        <Button icon>
+    function childToHTML(child, i) {
+      return (
+        <Button
+          key={child.id}
+          icon
+          onClick={(event, data) => {
+            //this.setState({ childNameFilter: data.children[1] });
+          }}
+        >
           <Icon name="child" basic color="teal" />
-          Ada
-          {/* {childListHTML} */}
+          {child.firstName}
         </Button>
-        <Button icon>
-          <Icon name="child" basic color="teal" />
-          Dorian
-        </Button>
-      </div>
-    );
+      );
+    }
+
+    return <Button.Group>{uniqueChildren.map(childToHTML)}</Button.Group>;
   };
 
   renderControlPanel = () => {
-    //const { mockPotties } = this.props;
-
-    // function mockPottyTypesToHTML(mockPotty, i) {
-    //   return <mockPottyTypes mockPotty={mockPotty} key={mockPotty.type} />;
-    // }
-
-    // const mockPottyTypesHTML = _.chain(mockPotties)
-    //   .filter((mockPotty, i) => {
-    //     if (mockPotties) {
-    //       console.log(mockPotties);
-    //       return true;
-    //     }
-    //   })
-    //   .map(mockPottyTypesToHTML)
-    //   .value();
-
     return (
       <Form>
         <Dropdown
