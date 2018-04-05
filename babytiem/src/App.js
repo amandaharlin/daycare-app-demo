@@ -58,22 +58,33 @@ class Potty extends Component {
 
 class PottyList extends Component {
   render() {
-    const { pottyList, diaperTypeFilterValue } = this.props;
+    const {
+      pottyList,
+      diaperTypeFilterValue,
+      uniqueChildrenFilterValues
+    } = this.props;
 
     function pottyToHTML(potty, i) {
       return <Potty potty={potty} key={potty.id} />;
     }
 
+    function pottiesByChildren(potty, i) {
+      if (!diaperTypeFilterValue) {
+        return true;
+      }
+      return potty.type.value === diaperTypeFilterValue;
+    }
+
+    function pottiesByType(potty, i) {
+      return _.findIndex(uniqueChildrenFilterValues, potty.child) > -1;
+    }
+
     const pottyListHTML = _.chain(pottyList)
-      .filter((potty, i) => {
-        if (!diaperTypeFilterValue) {
-          return true;
-        }
-        return potty.type.value === diaperTypeFilterValue;
-      })
+      .filter(pottiesByChildren)
+      .filter(pottiesByType)
       .map(pottyToHTML)
       .value();
-    //console.log('pottyListHTML', pottyListHTML);
+
     return (
       <List relaxed size="big">
         {pottyListHTML}
@@ -82,16 +93,12 @@ class PottyList extends Component {
   }
 }
 
-const childNameFilter = _.chain(uniqueChildren)
-  .filter((child, i) => {
-    console.log('childNameFilter', child.firstName);
-    return child.firstName;
-  })
-  .map()
-  .value();
-
 class App extends Component {
-  state = { diaperTypeFilterValue: '', childNameFilter: '' };
+  state = {
+    diaperTypeFilterValue: '',
+    uniqueChildrenFilterValues: uniqueChildren
+    //how do i set it all of the unique children in this array?
+  };
 
   renderHeader = () => {
     return (
@@ -103,22 +110,37 @@ class App extends Component {
   };
 
   renderChildFilter = () => {
-    function childToHTML(child, i) {
+    const { uniqueChildrenFilterValues } = this.state;
+
+    const childToHTML = (child, i) => {
+      const childIndex = _.findIndex(uniqueChildrenFilterValues, child);
+      const iExistInList = childIndex > -1;
+      console.log(iExistInList, uniqueChildrenFilterValues);
       return (
         <Button
           key={child.id}
           icon
+          active={iExistInList}
           onClick={(event, data) => {
-            //this.setState({ childNameFilter: data.children[1] });
+            const _newValues = iExistInList
+              ? _.filter(
+                  uniqueChildrenFilterValues,
+                  (selectionModelChild, i) => {
+                    return selectionModelChild.id != child.id;
+                  }
+                )
+              : [child, ...uniqueChildrenFilterValues];
+
+            this.setState({ uniqueChildrenFilterValues: _newValues });
           }}
         >
-          <Icon name="child" basic color="teal" />
+          <Icon name={iExistInList ? 'child' : ''} basic color="teal" />
           {child.firstName}
         </Button>
       );
-    }
+    };
 
-    return <Button.Group>{uniqueChildren.map(childToHTML)}</Button.Group>;
+    return <Button.Group basic>{uniqueChildren.map(childToHTML)}</Button.Group>;
   };
 
   renderControlPanel = () => {
@@ -141,8 +163,8 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
-    const { diaperTypeFilterValue } = this.state;
+    //console.log(this.state);
+    const { diaperTypeFilterValue, uniqueChildrenFilterValues } = this.state;
     return (
       <div className="App">
         <Container>
@@ -154,6 +176,7 @@ class App extends Component {
           <Divider hidden />
           <PottyList
             pottyList={mockPotties}
+            uniqueChildrenFilterValues={uniqueChildrenFilterValues}
             diaperTypeFilterValue={diaperTypeFilterValue}
           />
         </Container>

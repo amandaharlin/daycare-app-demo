@@ -15,6 +15,21 @@ const DorianHarlin = {
   photo: 'https://randomuser.me/api/portraits/lego/2.jpg'
 };
 
+const RipleyHarlin = {
+  id: 'c',
+  firstName: 'Ripley',
+  lastName: 'Harlin',
+  photo: 'https://randomuser.me/api/portraits/lego/3.jpg'
+};
+
+const RadixHarlin = {
+  id: 'd',
+  firstName: 'Radix',
+  lastName: 'Harlin',
+  ageInMonths: 12,
+  photo: 'https://randomuser.me/api/portraits/lego/4.jpg'
+};
+
 const accidentType = {
   icon: 'fire',
   value: 'potty_accident',
@@ -42,7 +57,7 @@ export const mockPotties = [
     date: lastWeek(1),
     type: attemptType,
     notes: '',
-    child: DorianHarlin
+    child: RipleyHarlin
   },
   {
     id: 2,
@@ -51,7 +66,7 @@ export const mockPotties = [
     date: lastWeek(2),
     type: accidentType,
     notes: '',
-    child: AdaHarlin
+    child: RadixHarlin
   },
   {
     id: 3,
