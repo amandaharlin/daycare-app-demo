@@ -1,5 +1,7 @@
 import 'semantic-ui-css/semantic.min.css';
 
+import './App.css';
+
 import _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
@@ -9,9 +11,11 @@ import {
   Divider,
   Dropdown,
   Form,
+  Grid,
   Header,
   Icon,
-  List
+  List,
+  Menu
 } from 'semantic-ui-react';
 
 import logo from './logo.svg';
@@ -102,10 +106,16 @@ class App extends Component {
 
   renderHeader = () => {
     return (
-      <Header as="h2" icon textAlign="center">
-        <Icon name="theme" circular basic color="teal" />
-        <Header.Content>Potty Time</Header.Content>
-      </Header>
+      <Menu>
+        <Menu.Item textAlign="center">
+          <Icon name="theme" circular basic color="teal" />
+        </Menu.Item>
+        <Menu.Item header> BabyTiem</Menu.Item>
+        <Menu.Item>Potties</Menu.Item>
+        <Menu.Item>Food</Menu.Item>
+        <Menu.Item>Play</Menu.Item>
+        <Menu.Item>Reports</Menu.Item>
+      </Menu>
     );
   };
 
@@ -166,19 +176,23 @@ class App extends Component {
     //console.log(this.state);
     const { diaperTypeFilterValue, uniqueChildrenFilterValues } = this.state;
     return (
-      <div className="App">
+      <div class="App">
+        {this.renderHeader()}
         <Container>
-          {this.renderHeader()}
-          <Divider hidden />
-          {this.renderControlPanel()}
-          <Divider hidden />
-          {this.renderChildFilter()}
-          <Divider hidden />
-          <PottyList
-            pottyList={mockPotties}
-            uniqueChildrenFilterValues={uniqueChildrenFilterValues}
-            diaperTypeFilterValue={diaperTypeFilterValue}
-          />
+          <div class="ui text container">
+            <div>
+              <Grid columns={2}>
+                <Grid.Column width={8}>{this.renderChildFilter()}</Grid.Column>
+                <Grid.Column width={8}>{this.renderControlPanel()}</Grid.Column>
+              </Grid>
+            </div>
+            <Divider hidden />
+            <PottyList
+              pottyList={mockPotties}
+              uniqueChildrenFilterValues={uniqueChildrenFilterValues}
+              diaperTypeFilterValue={diaperTypeFilterValue}
+            />
+          </div>
         </Container>
       </div>
     );
