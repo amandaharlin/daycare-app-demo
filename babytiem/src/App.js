@@ -30,7 +30,7 @@ const uniquePottyTypeOptions = _.chain(mockPotties)
     };
   })
   .uniqBy('value')
-  .value(); // {text: '', value: '', icon: ''}
+  .value();
 
 const uniqueChildren = _.chain(mockPotties)
   .map((mockPotty, i) => {
@@ -38,19 +38,17 @@ const uniqueChildren = _.chain(mockPotties)
   })
   .uniqBy('id')
   .value();
-//console.log('uniqueChildren', uniqueChildren);
 
 class Potty extends Component {
   render() {
     const { potty } = this.props;
     const { key, activity, icon, date, type, notes, child, firstName } = potty;
-    // console.log(child);
     return (
       <List.Item>
         <List.Icon color="teal" circular inverted name={icon} size="big" />
         <List.Content verticalAlign="middle">
           <List.Header>
-            {child.firstName} - {type.value}
+            {child.firstName} - {type.label}
           </List.Header>
           <List.Description>{date}</List.Description>
           <List.Description>{notes}</List.Description>
@@ -101,7 +99,6 @@ class App extends Component {
   state = {
     diaperTypeFilterValue: '',
     uniqueChildrenFilterValues: uniqueChildren
-    //how do i set it all of the unique children in this array?
   };
 
   renderHeader = () => {
